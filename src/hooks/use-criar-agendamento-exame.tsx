@@ -32,9 +32,9 @@ export const useCriarAgendamentoExame = (exameId: string) => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          exameId,
+          exame_id: exameId,
           observacao: fieldValues.observacao,
-          dataCriacao: fieldValues.dataAgendamento
+          dataAgendamento: fieldValues.dataAgendamento
         })
       })
       if (response.status === 201) {

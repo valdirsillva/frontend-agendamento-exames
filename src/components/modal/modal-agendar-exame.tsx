@@ -3,11 +3,6 @@ import { useCriarAgendamentoExame } from '../../hooks/use-criar-agendamento-exam
 import { CustomInput, TextFieldCustom } from '../../styles/custom-style';
 import { Fragment } from 'react/jsx-runtime';
 
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import dayjs, { Dayjs } from 'dayjs';
-
 export const ModalAgendarExame = (props: any) => {
   const { data: { nome, id } } = props
   const { fieldValues, handleChangeValues, handleOpen, handleClose, open, salvarAgendamento } = useCriarAgendamentoExame(id)
@@ -53,23 +48,16 @@ export const ModalAgendarExame = (props: any) => {
               </div>
 
               <div className="sm:w-full md:w-12/12">
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <DateTimePicker
-                    id="dataAgendamento"
-                    name="dataAgendamento"
-                    label="Agendar data e hora"
-                    value={fieldValues.dataAgendamento ?? null}
-                    sx={TextFieldCustom}
-                    className={`${CustomInput}`}
-                    minDateTime={dayjs()}
-                    onChange={(newValue) => {
-                      if (newValue) {
-                        const formataISOString = dayjs(newValue).toISOString()
-                        handleChangeValues(formataISOString)
-                      }
-                    }}
-                  />
-                </LocalizationProvider>
+
+                <input type='datetime-local'
+                  id="dataAgendamento"
+                  name="dataAgendamento"
+                  value={fieldValues.dataAgendamento}
+                  className={`${CustomInput}`}
+                  onChange={handleChangeValues}
+                // min={Date.now()}
+                />
+
               </div>
 
               <div className="sm:w-full md:w-12/12">
