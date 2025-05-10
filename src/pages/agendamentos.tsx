@@ -2,21 +2,22 @@ import { Header } from "../header/header"
 import { DataGrid } from '@mui/x-data-grid'
 import { customStyles } from "../styles/custom-style-datagrid";
 import { useEffect, useState } from "react";
+import { ModalRemoverAgendamento } from "../components/modal/modal-remover-agendamento";
+import { ToastContainer } from "react-toastify";
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 70 },
+  { field: 'id', headerName: 'ID', width: 50 },
   { field: 'nome', headerName: 'EXAME', width: 180 },
-  { field: 'dataCriacao', headerName: 'DATA AGENDAMENTO', width: 200 },
-  { field: 'observacao', headerName: 'observacao', width: 400 },
+  { field: 'dataCriacao', headerName: 'DATA AGENDAMENTO', width: 230 },
+  { field: 'observacao', headerName: 'OBSERVAÇÃO', width: 700 },
   {
     field: 'edit',
     headerName: '-',
-    width: 200,
-    renderCell: (params) => {
-      const agendamentoId = params.row.id;
+    width: 100,
+    renderCell: (params: any) => {
       return (
         <div style={{ display: 'flex', gap: 20, justifyContent: 'center', width: '100%' }}>
-          {/* <ModalRemoverAgendamento agendamentoId={agendamentoId} /> */}
+          <ModalRemoverAgendamento data={params} />
         </div>
       )
     },
@@ -26,7 +27,6 @@ const columns = [
 const paginationModel = { page: 0, pageSize: 5 }
 
 export const Agendamentos = () => {
-
   const [listaAgendamentos, setListaAgendamentos] = useState([])
 
   const fetchExames = async () => {
@@ -49,11 +49,11 @@ export const Agendamentos = () => {
 
       <main className="w-full flex flex-col ">
         <div className="w-full md:w-full flex flex-col items-center mt-16  ">
-          <h1 className="w-10/12 font-semibold flex gap-2 text-gray-200 sm:flex-row md:text-3xl md:py-5 ">
+          <h1 className="w-10/12 font-semibold flex gap-2 text-[#00be00] sm:flex-row md:text-3xl md:py-5 ">
             Agendamentos
           </h1>
         </div>
-
+        <ToastContainer />
         <div className="w-full flex flex-row flex-wrap gap-4 px-30 pt-14">
           <DataGrid
             rows={listaAgendamentos}

@@ -1,4 +1,4 @@
-// import { toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import { useState } from 'react'
 
 export const useCriarAgendamentoExame = (exameId: string) => {
@@ -26,6 +26,10 @@ export const useCriarAgendamentoExame = (exameId: string) => {
 
   const salvarAgendamento = async () => {
     try {
+      if (!fieldValues.dataAgendamento) {
+        throw new Error('A data de agendamento não foi definida')
+      }
+
       const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/agendamentos`, {
         method: 'POST',
         headers: {
@@ -38,10 +42,11 @@ export const useCriarAgendamentoExame = (exameId: string) => {
         })
       })
       if (response.status === 201) {
-        alert('Agendamento realizado com sucesso')
+        toast.success('Agendamento realizado com sucesso.')
       }
     } catch (error) {
       console.error(error)
+      toast.error('A data de agendamento não foi definida')
     }
   }
 

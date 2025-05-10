@@ -10,7 +10,7 @@ export const customStyles = {
 
   '& .MuiDataGrid-container--top [role=row], .css-1m6jkzy-MuiDataGrid-root .MuiDataGrid-container--bottom [role=row]': {
     color: '#fff',
-    backgroundColor: '#17171a', // Customizando cor background head datagrid
+    backgroundColor: '#aef5be', // Customizando cor background head datagrid
   },
   '& .MuiDataGrid-row': {
     color: 'white', // Customiando cor de cada linha do datagrid
@@ -25,15 +25,17 @@ export const customStyles = {
   },
 
   '& .MuiDataGrid-columnHeader, & .MuiDataGrid-overlay': {
-    backgroundColor: '#1a1a1e !important', // Força a cor de fundo no cabeçalho das colunas
+    backgroundColor: '#aef5be !important', // Força a cor de fundo no cabeçalho das colunas
   },
 
   '& .MuiDataGrid-columnHeader, & .MuiDataGrid-cell': {
     border: '1px solid #f7f7f712', // Borda das células
+    fontSize: '1.2rem',
   },
 
   '& .MuiDataGrid-cell': {
     color: '#8d96a7', // Cor do texto nas células
+    textTransform: 'uppercase'
   },
 
   '& .MuiFormLabel-root, & .MuiDataGrid-columnHeaders, & .MuiDataGrid-columnHeader, & .MuiDataGrid-overlay, & .MuiDataGrid-footerContainer, & .MuiTablePagination-toolbar, & .MuiDataGrid-sortIcon, & .MuiInputBase-input': {

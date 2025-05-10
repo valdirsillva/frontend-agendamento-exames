@@ -28,7 +28,7 @@ export const Home = () => {
 
       <main className="w-full flex flex-col ">
         <div className="w-full md:w-full flex flex-col items-center jus mt-16  ">
-          <h1 className="w-10/12 font-semibold flex gap-2 text-gray-200 sm:flex-row md:text-3xl md:py-5 ">
+          <h1 className="w-10/12 font-semibold flex gap-2 text-[#00be00] sm:flex-row md:text-3xl md:py-5 ">
             Exames disponíveis
           </h1>
         </div>

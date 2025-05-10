@@ -1,66 +1,64 @@
-import { Box, Modal, TextField, Typography } from '@mui/material'
+import { Delete } from '@mui/icons-material'
+import { Box, Modal, Typography } from '@mui/material'
 import { useCriarAgendamentoExame } from '../../hooks/use-criar-agendamento-exame';
-import { CustomInput, TextFieldCustom } from '../../styles/custom-style';
 import { Fragment } from 'react/jsx-runtime';
+import { toast } from 'react-toastify';
 
-export const ModalRemoverAgendamento = ({ agendamentoId }: any) => {
-  const { fieldValues, handleOpen, handleClose, open } = useCriarAgendamentoExame(agendamentoId)
+export const ModalRemoverAgendamento = ({ data }: any) => {
+  const { handleOpen, handleClose, open } = useCriarAgendamentoExame(data.row.id)
 
   const removerAgendamento = async () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/agendamentos/${agendamentoId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao deletar agendamento');
+      if (!data.row.id) {
+        throw new Error('Id do exame não está sendo passado')
       }
 
-      console.log('Agendamento removido com sucesso!');
+      const response = await fetch(`${import.meta.env.VITE_APP_URL}/api/agendamentos/${data.row.id}`, {
+        method: 'DELETE',
+      })
+
+      if (!response.ok) {
+        throw new Error('Erro ao deletar agendamento')
+      }
+
+      toast.success('Agendamento removido com sucesso.')
     } catch (error) {
-      console.error('Erro ao remover agendamento:', error);
+      console.error('Erro ao remover agendamento:', error)
     }
   }
 
   return (
     <Fragment>
-      <div className="w-full flex justify-start">
-        <a onClick={handleOpen}
-          className="cursor-pointer flex bg-violet-500 text-white rounded-full py-2 px-4">
-          Agendar
-        </a>
-      </div>
-      <section className="">
+      <section className="w-full flex justify-center items-center">
         <Delete
           fontSize='medium'
           titleAccess='Deletar produto'
           onClick={handleOpen}
-          className='cursor-pointer text-red-600'
+          className='cursor-pointer text-red-600 mt-3'
         />
         <Modal
           open={open}
-          // open
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
           className='w-full flex items-center justify-center'
         >
-          <Box className="md:w-[550px] sm:w-full flex flex-col bg-black border-solid border-[#c1c6cf4a] rounded-sm p-8 transform">
-            <Typography className="uppercase font-semibold text-orange-400" id="modal-modal-title" variant="h6" component="h2">
+          <Box className="md:w-[550px] sm:w-full flex flex-col bg-white border-solid border-[#c1c6cf4a] rounded-sm p-8 transform">
+            <Typography className="uppercase font-bold  text-[#4763ed]" id="modal-modal-title" variant="h6" component="h2">
               Deseja remover o agendamento?
             </Typography>
 
             <div className="flex flex-col mt-10 gap-4">
               <div className="w-12/12 flex gap-3 flex-col">
-                <span>Exame: {fieldValues.exame} </span>
-                <span>Data agendamento: {fieldValues.dataAgendamento} </span>
+                <span className="text-gray-600">Exame: {data.row.nome} </span>
+                <span className="text-gray-600">Data agendamento: {data.row.dataCriacao} </span>
               </div>
 
               <div className="w-12/12 flex gap-5 mt-5">
                 <button
                   type="button"
                   onClick={handleClose}
-                  className={`flex justify-center border-2 border-[#04b200] rounded-md transparent  px-8 py-3 text-sm font-semibold leading-6 text-white shadow-sm`}
+                  className={`flex justify-center border-2 border-[#04b200] rounded-md transparent  px-6 py-3 text-sm font-semibold leading-6 text-[#121218] shadow-sm`}
                 >
                   Não
                 </button>
@@ -68,8 +66,7 @@ export const ModalRemoverAgendamento = ({ agendamentoId }: any) => {
                 <button
                   type="button"
                   onClick={removerAgendamento}
-                  // disabled={!isLoginFormValid}
-                  className={`flex justify-center rounded-md bg-[#ef0b0b] px-8 py-3 border-2 border-[#ef0b0b] text-sm font-semibold leading-6 text-white shadow-sm`}
+                  className={`flex justify-center cursor-pointer rounded-md bg-[#ef0b0b] px-8 py-3 border-2 border-[#ef0b0b] text-sm font-semibold leading-6 text-[white] shadow-sm`}
                 >
                   Sim
                 </button>

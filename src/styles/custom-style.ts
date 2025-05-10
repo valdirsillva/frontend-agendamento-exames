@@ -1,13 +1,13 @@
 
-const CustomInput = "block w-full rounded-md bg-white border-0 py-4 px-5 text-gray-900 shadow-sm ring-1 ring-inset ring-[#d9d9d9] placeholder:text-gray-900 focus:ring-1 focus:ring-[#04b200] text-lg md:leading-6"
+const CustomInput = "block w-full rounded-md bg-white border-0 py-4 px-5  shadow-sm ring-1 ring-inset ring-[#d9d9d9] placeholder:text-gray-900 focus:ring-1 focus:ring-[#04b200] text-lg md:leading-6"
 
 const TextFieldCustom = {
   '& .MuiOutlinedInput-root': {
     '& fieldset, &.Mui-focused fieldset': {
-      borderColor: '#d9d9d9', // cor padrão
+      borderColor: '#d9d9d9', // cor padrã
     },
     '& .MuiInputBase-input': {
-      color: '#fff'
+      fontSize: '1.2rem',
     },
     '&:hover fieldset': {
       borderColor: '#04b200', // cor ao passar o mouse
@@ -28,7 +28,7 @@ const TextFieldCustom = {
 
   '& .MuiInputBase-input': {
     borderRadius: '4px',
-    backgroundColor: '#121214'
+    // backgroundColor: '#121214'
   },
 
   '& .MuiFormLabel-root': {
