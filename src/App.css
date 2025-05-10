@@ -6,7 +6,7 @@ body {
   font-optical-sizing: auto;
   font-weight: 1rem;
   font-style: normal;
-  background-color: #ffffff;
+  /* background-color: #ffffff; */
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }

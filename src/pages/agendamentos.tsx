@@ -1,9 +1,10 @@
 import { Header } from "../header/header"
 import { DataGrid } from '@mui/x-data-grid'
 import { customStyles } from "../styles/custom-style-datagrid";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ModalRemoverAgendamento } from "../components/modal/modal-remover-agendamento";
 import { ToastContainer } from "react-toastify";
+import { DarkModeContext } from "../context/dark-mode-context";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 50 },
@@ -27,6 +28,8 @@ const columns = [
 const paginationModel = { page: 0, pageSize: 5 }
 
 export const Agendamentos = () => {
+  const { darkMode } = useContext(DarkModeContext)
+
   const [listaAgendamentos, setListaAgendamentos] = useState([])
 
   const fetchExames = async () => {
@@ -44,7 +47,7 @@ export const Agendamentos = () => {
   }, [])
 
   return (
-    <section className="w-full">
+    <section className={darkMode ? `bg-[#121218] h-screen` : `bg-white h-screen`}>
       <Header />
 
       <main className="w-full flex flex-col ">

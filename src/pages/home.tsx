@@ -1,11 +1,10 @@
-import { useEffect, useState } from "react"
-import { Header } from "../header/header"
+import { useContext, useEffect, useState } from "react"
+import { DarkModeContext } from "../context/dark-mode-context"
 import { ModalAgendarExame } from "../components/modal/modal-agendar-exame"
-
-// import { ModalAgendarExame } from '../components/modal/modal-agendar-exame'
-
+import { Header } from "../header/header"
 
 export const Home = () => {
+  const { darkMode } = useContext(DarkModeContext)
   const [listaExames, setListaExames] = useState([])
 
   const fetchExames = async () => {
@@ -23,9 +22,8 @@ export const Home = () => {
   }, [])
 
   return (
-    <section className="w-full">
+    <section className={darkMode ? `bg-[#121218]` : `bg-white h-screen`}>
       <Header />
-
       <main className="w-full flex flex-col ">
         <div className="w-full md:w-full flex flex-col items-center jus mt-16  ">
           <h1 className="w-10/12 font-semibold flex gap-2 text-[#00be00] sm:flex-row md:text-3xl md:py-5 ">
