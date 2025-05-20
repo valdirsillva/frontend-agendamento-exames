@@ -3,9 +3,12 @@ import { useCriarAgendamentoExame } from '../../hooks/use-criar-agendamento-exam
 import { CustomInput, TextFieldCustom } from '../../styles/custom-style';
 import { Fragment } from 'react/jsx-runtime';
 import { ToastContainer } from 'react-toastify';
+import { useContext } from 'react';
+import { DarkModeContext } from '../../context/dark-mode-context';
 
 export const ModalAgendarExame = (props: any) => {
   const { data: { nome, id } } = props
+  const { darkMode } = useContext(DarkModeContext)
   const { fieldValues, handleChangeValues, handleOpen, handleClose, open, salvarAgendamento } = useCriarAgendamentoExame(id)
 
   return (
@@ -25,7 +28,7 @@ export const ModalAgendarExame = (props: any) => {
           onClose={handleClose}
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
-          className='w-full flex items-center justify-center'
+          className={darkMode ? `w-full flex items-center justify-center bg-[#121218]` : `w-full flex items-center justify-center bg-white h-screen`}
         >
 
           <Box className="md:w-[550px] sm:w-full flex flex-col bg-white border-solid border-[#c1c6cf4a] rounded-sm p-8 transform">

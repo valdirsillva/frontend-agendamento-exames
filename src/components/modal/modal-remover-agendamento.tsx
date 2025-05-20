@@ -3,8 +3,11 @@ import { Box, Modal, Typography } from '@mui/material'
 import { useCriarAgendamentoExame } from '../../hooks/use-criar-agendamento-exame';
 import { Fragment } from 'react/jsx-runtime';
 import { toast } from 'react-toastify';
+import { useContext } from 'react';
+import { DarkModeContext } from '../../context/dark-mode-context';
 
 export const ModalRemoverAgendamento = ({ data }: any) => {
+  const { darkMode } = useContext(DarkModeContext)
   const { handleOpen, handleClose, open } = useCriarAgendamentoExame(data.row.id)
 
   const removerAgendamento = async () => {
@@ -43,7 +46,8 @@ export const ModalRemoverAgendamento = ({ data }: any) => {
           aria-describedby="modal-modal-description"
           className='w-full flex items-center justify-center'
         >
-          <Box className="md:w-[550px] sm:w-full flex flex-col bg-white border-solid border-[#c1c6cf4a] rounded-sm p-8 transform">
+          <Box
+            className="md:w-[550px] sm:w-full flex flex-col bg-white border-solid border-[#c1c6cf4a] rounded-sm p-8 transform">
             <Typography className="uppercase font-bold  text-[#4763ed]" id="modal-modal-title" variant="h6" component="h2">
               Deseja remover o agendamento?
             </Typography>

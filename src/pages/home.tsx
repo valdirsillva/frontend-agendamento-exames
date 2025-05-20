@@ -2,16 +2,20 @@ import { useContext, useEffect, useState } from "react"
 import { DarkModeContext } from "../context/dark-mode-context"
 import { ModalAgendarExame } from "../components/modal/modal-agendar-exame"
 import { Header } from "../header/header"
+import { Loading } from "../components/loading/loading-custom"
 
 export const Home = () => {
+  const [loading, setLoading] = useState(false)
   const { darkMode } = useContext(DarkModeContext)
   const [listaExames, setListaExames] = useState([])
 
   const fetchExames = async () => {
     try {
+      setLoading(true)
       const data = await fetch(`${import.meta.env.VITE_APP_URL}/api/exames`)
       const response = await data.json()
       setListaExames(response)
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -32,6 +36,7 @@ export const Home = () => {
         </div>
 
         <div className="w-full flex flex-row flex-wrap items-stretch gap-7 px-30 pt-14">
+          <Loading loading={loading} />
           {listaExames.map((exame: any) => (
             <div className="w-[23%] bg-[#aef5be] px-3 py-6 rounded-md" key={exame.id}>
               <p className="text-xl font-normal mb-2">{exame.nome}</p>

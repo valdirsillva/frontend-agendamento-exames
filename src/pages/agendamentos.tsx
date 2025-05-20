@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { ModalRemoverAgendamento } from "../components/modal/modal-remover-agendamento";
 import { ToastContainer } from "react-toastify";
 import { DarkModeContext } from "../context/dark-mode-context";
+import { Loading } from "../components/loading/loading-custom";
 
 const columns = [
   { field: 'id', headerName: 'ID', width: 50 },
@@ -28,15 +29,17 @@ const columns = [
 const paginationModel = { page: 0, pageSize: 5 }
 
 export const Agendamentos = () => {
+  const [loading, setLoading] = useState(false)
   const { darkMode } = useContext(DarkModeContext)
-
   const [listaAgendamentos, setListaAgendamentos] = useState([])
 
   const fetchExames = async () => {
     try {
+      setLoading(true)
       const data = await fetch(`${import.meta.env.VITE_APP_URL}/api/agendamentos`)
       const response = await data.json()
       setListaAgendamentos(response)
+      setLoading(false)
     } catch (error) {
       console.log(error)
     }
@@ -58,6 +61,7 @@ export const Agendamentos = () => {
         </div>
         <ToastContainer />
         <div className="w-full flex flex-row flex-wrap gap-4 px-30 pt-14">
+          <Loading loading={loading} />
           <DataGrid
             rows={listaAgendamentos}
             columns={columns}
