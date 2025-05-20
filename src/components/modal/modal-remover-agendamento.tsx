@@ -3,11 +3,9 @@ import { Box, Modal, Typography } from '@mui/material'
 import { useCriarAgendamentoExame } from '../../hooks/use-criar-agendamento-exame';
 import { Fragment } from 'react/jsx-runtime';
 import { toast } from 'react-toastify';
-import { useContext } from 'react';
-import { DarkModeContext } from '../../context/dark-mode-context';
 
 export const ModalRemoverAgendamento = ({ data }: any) => {
-  const { darkMode } = useContext(DarkModeContext)
+  // const { darkMode } = useContext(DarkModeContext)
   const { handleOpen, handleClose, open } = useCriarAgendamentoExame(data.row.id)
 
   const removerAgendamento = async () => {
